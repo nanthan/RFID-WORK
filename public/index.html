@@ -16,7 +16,7 @@
 		<tbody>
 			<tr ng-repeat="book in books">
 				<td>{{book.title}}</td>
-				<td>{{book.price}</td>
+				<td>{{book.price | currency}}</td>
 			</tr>
 		</tbody>
 	</table>
