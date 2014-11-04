@@ -8,6 +8,7 @@ app.get('/api/books', function(req, res){
 		{title: 'Angular', price: 800},
 		{title: 'NodeJS', price: 950},
 		{title: 'Bootstrap', price: 600},
+		{title: 'MongoDB', price: 670}
 	];
 	res.send(books);
 });
