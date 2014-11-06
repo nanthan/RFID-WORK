@@ -3,18 +3,15 @@ var mongojs = require('mongojs');
 var app = express();
 var db = mongojs('my_server', ['book']);
 
+
 app.use(express.static(__dirname + '/public'));
 
 app.get('/api/book', function(req, res){
-	var books = [
-		{title: 'Angular', price: 800},
-		{title: 'NodeJS', price: 950},
-		{title: 'Bootstrap', price: 600},
-		{title: 'MongoDB', price: 670}
-	];
-	res.send(books);
+	db.book.find({}, function(err, docs){
+	res.send(docs);	
+	});
 });
 
-var server = app.listen(3200, function () {
+var server = app.listen(3000, function () {
   console.log("server is running now")
 })
