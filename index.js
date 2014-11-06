@@ -1,5 +1,7 @@
-var express = require('express')
-var app = express()
+var express = require('express');
+var mongojs = require('mongojs');
+var app = express();
+var db = mongojs('my_server', ['book']);
 
 app.use(express.static(__dirname + '/public'));
 
