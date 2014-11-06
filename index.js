@@ -15,7 +15,9 @@ app.get('/api/book', function(req, res){
 
 app.post('/api/book', function(req, res){
 	//insert new book
-
+	db.book.insert(req.body, function(err, docs){
+		res.send(docs);
+	});
 });
 
 var server = app.listen(3000, function () {
