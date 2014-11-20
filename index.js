@@ -19,11 +19,12 @@ app.post('/api/book', function(req, res){
 	//insert new book
 	db.book.insert(req.body, function(err, docs){
 		res.send(docs);
+		io.emit("book:refresh");
 	});
 });
 
-io.on('connention', function(socket){
-	console.log('a user connected');
+io.on('connection', function(socket){
+	console.log("a user connected");
 })
 
 var server = http.listen(3000, function () {
