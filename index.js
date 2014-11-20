@@ -3,7 +3,7 @@ var mongojs = require('mongojs');
 var bodyParser = require('body-parser');
 var app = express();
 var http = require('http').Server(app);
-var io = require(socket.io).(http);
+var io = require('socket.io')(http);
 var db = mongojs('my_server', ['book']);
 
 
