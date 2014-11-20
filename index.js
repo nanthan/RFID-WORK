@@ -22,6 +22,10 @@ app.post('/api/book', function(req, res){
 	});
 });
 
+io.on('connention', function(socket){
+	console.log('a user connected');
+})
+
 var server = http.listen(3000, function () {
   console.log("server is running now")
 })
