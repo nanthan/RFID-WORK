@@ -6,8 +6,10 @@ angular.module("myApp", ['btford.socket-io']) //load module
 })
 .controller('mainCtrl', function($scope, $http, socketIO){
 	$scope.books = [];
+	$scope.bookInstance = {};
+
 	refreshBooks();
-	
+
 	function refreshBooks(){
 		$http.get('/api/book').success(function(data){
 			$scope.books = data;
@@ -23,5 +25,5 @@ angular.module("myApp", ['btford.socket-io']) //load module
 
 	socketIO.on('book:refresh', function(){
 		refreshBooks();
-	})
+	});
 })
