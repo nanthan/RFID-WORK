@@ -7,7 +7,7 @@ angular.module("myApp", ['btford.socket-io']) //load module
 .controller('mainCtrl', function($scope, $http, socketIO){
 	$scope.books = [];
 	$scope.bookInstance = {};
-
+	$scope.number = 5;
 	refreshBooks();
 
 	function refreshBooks(){
@@ -20,6 +20,13 @@ angular.module("myApp", ['btford.socket-io']) //load module
 		$http.post('/api/book', $scope.bookInstance).success(function(data){
 			$scope.books.push(data);
 			$scope.bookInstance = {};
+		});
+	}
+
+	$scope.cal = function(){
+		var sum = 0;
+		angular.forEach(books, function(index) {
+			sum += index;
 		});
 	}
 
