@@ -5,7 +5,8 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var db = mongojs('my_server', ['book']);
-
+var cal = require('app/cal');
+console.log(cal.add(2,3));
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
