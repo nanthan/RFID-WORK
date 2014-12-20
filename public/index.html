@@ -2,10 +2,12 @@
 <head>
 	<meta charset="utf-8">
 	<title>Welcome to ANA Company</title>
-	<<script src="lib/jquery/dist/jquery.min.js"></script>
+	<script src="lib/jquery/dist/jquery.min.js"></script>
 	<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="js/date_time.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/signin.css">
 	<link rel="stylesheet" type="text/css" href="css/sticky-footer-navbar.css">
+	<link rel="stylesheet" type="text/css" href="css/myCSS.css">
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.css">
 </head>
 <body>
@@ -41,6 +43,49 @@ glyphicon glyphicon-sort"></span>Login</a></li>
             </li>
           </ul>
         </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+	<div class="container">
+      <div class="page-header">
+        <h1 align="center">Last Check-In<br />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <table class="table-condensed table-index" height="400" width="100%" border="1">
+            <tr>
+            	<td align="center" width="30%" rowspan="4"><img src="img/person.jpg"></td>
+            	<td width="70%">First Name : {{ins.fname}}</td>
+            </tr>
+            <tr>
+            	<td width="50%">Last Name : {{ins.lname}}</td>
+            </tr>
+            <tr>
+            	<td width="50%">Position : {{ins.position}}</td>
+            </tr>
+            <tr>
+            	<td width="50%">Arrived : {{ins.arrived}}</td>
+            </tr>
+
+            <tr>
+            	<td width="50%" colspan="2" align="center">Time : 
+            		<span id="date_time"></span>
+            		<script type="text/javascript">
+            			window.onload = date_time('date_time');
+            		</script>
+            	</td>
+            </tr>
+        </table> 
+        </div>
+      <div class="col-md-2"></div>
+    </div>
+    <hr>
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted" align="center">© ANA Company 2013-2014</p>
       </div>
     </div>
 </body>
