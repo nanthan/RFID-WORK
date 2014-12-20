@@ -1,9 +1,7 @@
 //test/cal-test.js
 var assert = require('assert');
 var cal = require('../app/cal');
-
-console.log(cal.add(2, 3));
-
+//jasmin style
 describe('cal', function(){
 	describe('add', function(){
 		it('should add correctly', function(){
@@ -11,3 +9,13 @@ describe('cal', function(){
 		})
 	})
 })
+
+
+/*describe('cal', function(){
+	describe('add', function(done){
+		it('should add correctly', function(){
+			assert.equal(5, cal.add(2, 3));
+			done();
+		})
+	})
+})*/

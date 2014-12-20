@@ -12,38 +12,41 @@
 <body ng-controller="mainCtrl">
 	<table class="table table-hover">
 		<thead>
-			<th>Number</th>
-			<th>Title</th>
-			<th>Price</th>
+			<th>ID</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>RFID Card</th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="book in books">
-				<td>{{book._id}}</td>
-				<td>{{book.title}}</td>
-				<td>{{book.price | currency}}</td>
-			</tr>
-			<tr>
-				<td colspan="2">Sumation</td>
-				<td>xxx</td>
+			<tr ng-repeat="employee in employees">
+				<td>{{employee._id}}</td>
+				<td>{{employee.fname}}</td>
+				<td>{{employee.lname}}</td>
+				<td>{{employee.card}}</td>
 			</tr>
 		</tbody>
 	</table>
-
+	<hr>
 	<form class="form-inline" role="form">
   		<div class="form-group">
     		<div class="input-group">
-		      <div class="input-group-addon">Name</div>
-		      <input type="text" class="form-control" id="title" placeholder="Title" ng-model="bookInstance.title">
+		      <div class="input-group-addon">Frist Name</div>
+		      <input type="text" class="form-control" id="fname" placeholder="First Name" ng-model="employeeInstance.fname">
     		</div>
   		</div>
   		<div class="form-group">
     		<div class="input-group">
-		      <div class="input-group-addon">Price</div>
-		      <input type="number" class="form-control" id="priceBook" placeholder="Price" ng-model="bookInstance.price">
+		      <div class="input-group-addon">Last Name</div>
+		      <input type="text" class="form-control" id="lname" placeholder="Last Name" ng-model="employeeInstance.lname">
     		</div>
   		</div>
-  		
-  		<button class="btn btn-default" ng-click="save()">Add</button>
+  		<div class="form-group">
+    		<div class="input-group">
+		      <div class="input-group-addon">RFID Card</div>
+		      <input type="text" class="form-control" id="card" placeholder="RFID Card" ng-model="employeeInstance.card">
+    		</div>
+  		</div>
+  		<button class="btn btn-default" ng-click="save()">Add Employee</button>
 	</form>
 
 </body>

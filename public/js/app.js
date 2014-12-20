@@ -5,32 +5,32 @@ angular.module("myApp", ['btford.socket-io']) //load module
 	});
 })
 .controller('mainCtrl', function($scope, $http, socketIO){
-	$scope.books = [];
-	$scope.bookInstance = {};
+	$scope.Employees = [];
+	$scope.employeeInstance = {};
 	$scope.number = 5;
-	refreshBooks();
+	refreshEmployees();
 
-	function refreshBooks(){
-		$http.get('/api/book').success(function(data){
-			$scope.books = data;
+	function refreshEmployees(){
+		$http.get('/api/employee').success(function(data){
+			$scope.employees = data;
 		});
 	}
 
 	$scope.save = function(){
-		$http.post('/api/book', $scope.bookInstance).success(function(data){
-			$scope.books.push(data);
-			$scope.bookInstance = {};
+		$http.post('/api/employee', $scope.employeeInstance).success(function(data){
+			$scope.employees.push(data);
+			$scope.employeeInstance = {};
 		});
 	}
 
 	$scope.cal = function(){
 		var sum = 0;
-		angular.forEach(books, function(index) {
+		angular.forEach(employees, function(index) {
 			sum += index;
 		});
 	}
 
-	socketIO.on('book:refresh', function(){
-		refreshBooks();
+	socketIO.on('employee:refresh', function(){
+		refreshEmployees();
 	});
 })
