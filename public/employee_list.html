@@ -71,19 +71,19 @@ glyphicon glyphicon-sort"></span>Login</a></li>
   		<div class="form-group">
     		<div class="input-group">
 		      <div class="input-group-addon">Frist Name</div>
-		      <input type="text" class="form-control" id="fname" placeholder="First Name" ng-model="employeeInstance.fname">
+		      <input type="text" class="form-control" id="fname" placeholder="First Name" ng-model="employeeInstance.fname" required>
     		</div>
   		</div>
   		<div class="form-group">
     		<div class="input-group">
 		      <div class="input-group-addon">Last Name</div>
-		      <input type="text" class="form-control" id="lname" placeholder="Last Name" ng-model="employeeInstance.lname">
+		      <input type="text" class="form-control" id="lname" placeholder="Last Name" ng-model="employeeInstance.lname" required>
     		</div>
   		</div>
   		<div class="form-group">
     		<div class="input-group">
 		      <div class="input-group-addon">RFID Card</div>
-		      <input type="text" class="form-control" id="card" placeholder="RFID Card" ng-model="employeeInstance.card">
+		      <input type="text" class="form-control" id="card" placeholder="RFID Card" ng-model="employeeInstance.card" required>
     		</div>
   		</div>
   		<button class="btn btn-default" ng-click="save()">Add Employee</button>

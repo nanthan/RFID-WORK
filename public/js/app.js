@@ -17,10 +17,12 @@ angular.module("myApp", ['btford.socket-io']) //load module
 	}
 
 	$scope.save = function(){
-		$http.post('/api/employee', $scope.employeeInstance).success(function(data){
+		if($scope.employeeInstance.fname != null && $scope.employeeInstance.lname != null && $scope.employeeInstance.card != null){
+			$http.post('/api/employee', $scope.employeeInstance).success(function(data){
 			$scope.employees.push(data);
 			$scope.employeeInstance = {};
-		});
+			});	
+		}
 	}
 
 	$scope.cal = function(){
