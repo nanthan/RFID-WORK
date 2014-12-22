@@ -1,6 +1,7 @@
 var express = require('express');
 var mongojs = require('mongojs');
 var bodyParser = require('body-parser');
+var dateFormat = require('dateformat');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -32,6 +33,33 @@ app.get('/api/admin', function(req, res){
 	});
 });
 
+app.post('/api/check-in',function(req,res){
+	now = new Date();
+	date = dateFormat(now, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+	hours = now.getHours()+"";
+	min  = now.getMinutes()+"";
+	sec  = now.getSeconds()+"";
+	console.log(date);
+	ins = { 
+				RFID: req.body.RFID,
+				Name: req.body.First_Name,
+				Date: date,
+				Hour: hours,
+				Min : min,
+				Sec : sec
+				}
+	db_emp.emp_list.insert((ins),function(err,data){
+		res.send(data);	
+		io.emit("check-in:refresh");
+	});
+});
+
+
+app.get('/api/check-in',function(req,res){
+	db_emp.emp_list.find({},function(err,logs){
+		res.send(logs);
+	});
+})
 
 io.on('connection', function(socket){
 	console.log("a user connected");
