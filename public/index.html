@@ -1,16 +1,21 @@
-<html>
+<html ng-app="myIns">
 <head>
 	<meta charset="utf-8">
 	<title>Welcome to ANA Company</title>
 	<script src="lib/jquery/dist/jquery.min.js"></script>
 	<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/date_time.js"></script>
+	<script type="text/javascript" src="lib/angular/angular.min.js"></script>
+	<script type="text/javascript" src="lib/socket.io-client/socket.io.js"></script>
+	<script type="text/javascript" src="lib/angular-socket-io/socket.js"></script>
+	<script type="text/javascript" src="js/instance.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="css/signin.css">
 	<link rel="stylesheet" type="text/css" href="css/sticky-footer-navbar.css">
 	<link rel="stylesheet" type="text/css" href="css/myCSS.css">
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.css">
 </head>
-<body>
+<body ng-controller="mainCtrl">
 <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
@@ -58,20 +63,20 @@ glyphicon glyphicon-sort"></span>Login</a></li>
         <table class="table-condensed table-index" height="400" width="100%" border="1">
             <tr>
             	<td align="center" width="30%" rowspan="4"><img src="img/person.jpg"></td>
-            	<td width="70%">First Name : {{ins.fname}}</td>
+            	<td width="70%">First Name : {{fname}}</td>
             </tr>
             <tr>
-            	<td width="50%">Last Name : {{ins.lname}}</td>
+            	<td width="70%">Last Name : {{lname}}</td>
             </tr>
             <tr>
-            	<td width="50%">Position : {{ins.position}}</td>
+            	<td width="70%">Position : {{position}}</td>
             </tr>
             <tr>
-            	<td width="50%">Arrived : {{ins.arrived}}</td>
+            	<td width="70%">Arrived : {{arrived}}</td>
             </tr>
 
             <tr>
-            	<td width="50%" colspan="2" align="center">Time : 
+            	<td width="50%" colspan="2" align="center"> 
             		<span id="date_time"></span>
             		<script type="text/javascript">
             			window.onload = date_time('date_time');

@@ -1,14 +1,18 @@
-<html>
+<html ng-app="myLogin">
 <head>
 	<meta charset="utf-8">
 	<title>Login</title>
 	<script src="lib/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="lib/angular/angular.min.js"></script>
 	<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="lib/angular-md5/angular-md5.min.js"></script>
+	<script type="text/javascript" src="js/login.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="css/signin.css">
 	<link rel="stylesheet" type="text/css" href="css/sticky-footer-navbar.css">
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.css">
 </head>
-<body>
+<body ng-controller="mainCtrl">
 <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
@@ -56,13 +60,13 @@ glyphicon glyphicon-sort"></span>Login</a></li>
       <div class="col-md-4">
         <form class="form-signin" role="form">
             <h2 class="form-signin-heading">Sign in</h2>
-            <input type="text" class="form-control" placeholder="Username" required autofocus>
-            <input type="password" class="form-control" placeholder="Password" required>
+            <input type="text" ng-model="username" class="form-control" placeholder="Username" required autofocus>
+            <input type="password" name="pass" ng-model="password" class="form-control" placeholder="Password" required>
             <label class="checkbox" align="center">
               <input type="checkbox" value="remember-me">Remember me
             </label>
-            <button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-ok-sign"></span> Login</button>
-
+            <button class="btn btn-lg btn-primary btn-block" ng-click="login()"><span class="glyphicon glyphicon-ok-sign"></span> Login</button>
+            <div>{{message}}</div>
           </form>
    		 <hr>
         </div>

@@ -1,7 +1,7 @@
 angular.module("myApp", ['btford.socket-io']) //load module
 .factory('socketIO', function(socketFactory){
 	return socketFactory({
-		ioSocket: io.connect("http://localhost:3000")
+		ioSocket: io.connect("http://localhost:3000/")
 	});
 })
 .controller('mainCtrl', function($scope, $http, socketIO){
