@@ -11,14 +11,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Panel extends JFrame {
+	String sfname = null;
+	String slname = null;
+	String sposition = null;
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public Panel() {
-		
+
 		JFrame frame = new JFrame("ANA Company");
 		frame.setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,5 +85,11 @@ public class Panel extends JFrame {
 		frame.setLocationByPlatform(true);
 		frame.setSize(800, 600);
 		frame.setVisible(true);	
+	}
+	
+	public void setForm(String fname, String lname, String position){
+		sfname = fname;
+		slname = lname;
+		sposition = position;
 	}
 }

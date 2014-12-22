@@ -3,13 +3,13 @@ package RFID;
 import jssc.SerialPort;
 import jssc.SerialPortException;
 
-public class ReadRFID implements Runnable {
+public class ReadRFID extends Thread {
 	private String RFID = null;
 	
 	public void run() {
-        System.out.println("Hello from a thread!");
+        //System.out.println("Hello from a thread!");
 		SerialPort serialPort = new SerialPort("COM7");
-		while (true) {
+		while(true){
 			try {
 				serialPort.openPort();// Open serial port
 				serialPort.setParams(9600, 8, 1, 0);// Set params.
@@ -18,7 +18,6 @@ public class ReadRFID implements Runnable {
 																// serial port
 					String s = new String(buffer);
 					RFID = s.substring(1,12);
-					System.out.println(s);
 					serialPort.closePort();// Close serial port
 			}
 	
