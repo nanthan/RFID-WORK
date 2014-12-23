@@ -87,9 +87,9 @@ public class Panel extends JFrame {
 		frame.setVisible(true);	
 	}
 	
-	public void setForm(String fname, String lname, String position){
+	public void setForm(String fname, String lname){
 		sfname = fname;
 		slname = lname;
-		sposition = position;
+		//sposition = position;
 	}
 }

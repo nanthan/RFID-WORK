@@ -2,3 +2,7 @@
 1419265384535	Delete element
 1419266475959	Rename type 'Main'
 1419268156762	Rename type 'App'
+1419324223129	Rename package 'RFID'
+1419324941026	Rename package 'SWD.RFID'
+1419325076309	Convert local variable 'client' to field
+1419325089665	Convert local variable 'request' to field
