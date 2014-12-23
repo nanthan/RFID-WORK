@@ -41,10 +41,10 @@ public class Main{
 					System.out.println(RFID);
 					if (RFID != null) {
 						try {
-							Thread.sleep(500);
+							Thread.sleep(1000);
 							Main.CheckRFID();
 							readRFID.setRFID(null);
-							Thread.sleep(500);
+							Thread.sleep(1000);
 						} catch (Exception e) {
 							System.out.println("Connection Fail");
 							e.printStackTrace();

@@ -41,10 +41,10 @@ public class Main{
 					System.out.println(RFID);
 					if (RFID != null) {
 						try {
-							Thread.sleep(500);
+							Thread.sleep(1000);
 							Main.CheckRFID();
 							readRFID.setRFID(null);
-							Thread.sleep(500);
+							Thread.sleep(1000);
 						} catch (Exception e) {
 							System.out.println("Connection Fail");
 							e.printStackTrace();
@@ -107,8 +107,8 @@ public class Main{
 //					}
 //					JSONArray json = new JSONArray('[' + sb.toString() + ']');
 
-					//System.out.println(person.getString("fname"));
-					form.setForm(person.getString("fname"),person.getString("lname"));
+					System.out.println(person.getString("fname"));
+					//form.setForm(json.getJSONObject(0).getString("fname"),json.getJSONObject(0).getString("lname"));
 						
 					// System.out.println(sb.toString());
 					//System.out.println(person.getString("fname"));
@@ -116,7 +116,13 @@ public class Main{
 				}
 			}
 
-		} catch (Exception e) {
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
