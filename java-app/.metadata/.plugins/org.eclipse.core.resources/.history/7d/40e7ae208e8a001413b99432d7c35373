@@ -11,10 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Panel extends JFrame {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	String sfname = null;
 	String slname = null;
 	String sposition = null;
@@ -96,10 +92,8 @@ public class Panel extends JFrame {
 		frame.setVisible(true);	
 	
 	}
-	
 	public void setForm(String fname, String lname){
 		TextFname.setText(fname);
-		TextLname.setText(lname);
 	}
 	
 }

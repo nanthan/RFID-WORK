@@ -96,7 +96,6 @@ public class Panel extends JFrame {
 		frame.setVisible(true);	
 	
 	}
-	
 	public void setForm(String fname, String lname){
 		TextFname.setText(fname);
 		TextLname.setText(lname);

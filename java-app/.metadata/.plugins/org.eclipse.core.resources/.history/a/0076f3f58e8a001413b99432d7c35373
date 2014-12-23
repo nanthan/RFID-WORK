@@ -7,6 +7,10 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+//import org.apache.http.HttpResponse;
+//import org.apache.http.client.HttpClient;
+//import org.apache.http.client.methods.HttpGet;
+//import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -91,7 +95,7 @@ public class Main{
 			HttpPost requestpost = new HttpPost("http://localhost:3000/api/employee");
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject person = array.getJSONObject(i);
-				//System.out.println(person.getString("card"));
+				System.out.println(person);
 				if (person.getString("card").equals(RFID)) {
 					StringEntity params = new StringEntity(person.toString());
 					requestpost.setHeader("Content-type", "application/json");
@@ -107,11 +111,11 @@ public class Main{
 					}
 					JSONArray json = new JSONArray('[' + sb.toString() + ']');
 
-					System.out.println(json.getJSONObject(0).getString("fname"));
+					System.out.println(sb);
 					//form.setForm(json.getJSONObject(0).getString("fname"),json.getJSONObject(0).getString("lname"));
 						
 					// System.out.println(sb.toString());
-					//System.out.println(person.getString("fname"));
+					System.out.println(person.getString("fname"));
 					break;
 				}
 			}

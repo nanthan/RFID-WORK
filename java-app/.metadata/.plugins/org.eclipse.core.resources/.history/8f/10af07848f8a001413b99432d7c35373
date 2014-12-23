@@ -17,8 +17,8 @@ public class ReadRFID extends Thread {
 					byte[] buffer = serialPort.readBytes(16);// Read 10 bytes from
 																// serial port
 					String s = new String(buffer);
-					RFID = s.substring(1,13);
-					//System.out.println(RFID);
+					RFID = s.substring(1,12);
+					System.out.println(RFID);
 					serialPort.closePort();// Close serial port
 			}
 	

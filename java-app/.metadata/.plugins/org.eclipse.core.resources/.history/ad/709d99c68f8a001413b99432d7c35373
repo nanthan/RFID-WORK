@@ -7,6 +7,10 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+//import org.apache.http.HttpResponse;
+//import org.apache.http.client.HttpClient;
+//import org.apache.http.client.methods.HttpGet;
+//import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -107,11 +111,11 @@ public class Main{
 					}
 					JSONArray json = new JSONArray('[' + sb.toString() + ']');
 
-					System.out.println(json.getJSONObject(0).getString("fname"));
-					//form.setForm(json.getJSONObject(0).getString("fname"),json.getJSONObject(0).getString("lname"));
+					//System.out.println(sb);
+					form.setForm(json.getJSONObject(0).getString("fname"),json.getJSONObject(0).getString("lname"));
 						
 					// System.out.println(sb.toString());
-					//System.out.println(person.getString("fname"));
+					System.out.println(person.getString("fname"));
 					break;
 				}
 			}

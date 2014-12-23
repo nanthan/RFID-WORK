@@ -11,20 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Panel extends JFrame {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	String sfname = null;
 	String slname = null;
 	String sposition = null;
 
-	
-	JTextField TextFname = new JTextField();
-	JTextField TextLname = new JTextField();
-	JTextField TextPosition = new JTextField();
-	JTextField TextArrived = new JTextField();
-	
+	private static final long serialVersionUID = 1L;
+
 	public Panel() {
 
 		JFrame frame = new JFrame("ANA Company");
@@ -44,11 +36,10 @@ public class Panel extends JFrame {
 		JLabel arrived = new JLabel("Arrived : ");
 		JLabel date = new JLabel();
 		
-		
-		TextFname.setEnabled(false);
-		TextLname.setEnabled(false);
-		TextPosition.setEnabled(false);
-		TextArrived.setEnabled(false);
+		JTextField TextFname = new JTextField("Hello World", 15);
+		JTextField TextLname = new JTextField("Hello World", 15);
+		JTextField TextPosition = new JTextField("Hello World", 15);
+		JTextField TextArrived = new JTextField("Hello World", 15);
 		
 		fname.setSize(300, 30);
 		fname.setLocation(450, 50);
@@ -94,12 +85,11 @@ public class Panel extends JFrame {
 		frame.setLocationByPlatform(true);
 		frame.setSize(800, 600);
 		frame.setVisible(true);	
-	
 	}
 	
 	public void setForm(String fname, String lname){
-		TextFname.setText(fname);
-		TextLname.setText(lname);
+		sfname = fname;
+		slname = lname;
+		//sposition = position;
 	}
-	
 }

@@ -77,7 +77,7 @@ public class Main{
 				sb.append(line);
 			}
 			array = new JSONArray(sb.toString());
-			//System.out.println(array);
+			System.out.println(array);
 
 		}catch (Exception e) {
 			System.out.println(e);
