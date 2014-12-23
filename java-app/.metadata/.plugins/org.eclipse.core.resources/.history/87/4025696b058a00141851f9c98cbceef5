@@ -1,0 +1,52 @@
+package RFID;
+
+import org.apache.http.client.*;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.json.JSONArray;
+
+
+public class Main{
+	public static String RFID = null;
+	public static JSONArray array;
+	public static Panel form;
+	public static ReadRFID readRFID = null;
+		
+	public static void main(String[] args){
+		
+		form = new Panel();
+		readRFID = new ReadRFID();
+		
+	
+		Runnable task = new Runnable(){
+			public void run(){
+				readRFID.start();
+				while(true){
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					RFID = readRFID.getRFID();
+					System.out.println(RFID);
+				}
+			}
+		};
+		
+		Thread check = new Thread(task);
+		check.start();
+		
+		
+	}
+	
+
+	public static void CheckIn(){
+		try {
+			HttpClient client = HttpClientBuilder.create().build();
+			HttpPost requestpost = new HttpPost("http://localhost:8080/api/check-in");
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+}

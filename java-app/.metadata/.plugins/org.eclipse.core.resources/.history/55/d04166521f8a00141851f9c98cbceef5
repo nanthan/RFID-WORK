@@ -1,0 +1,110 @@
+package RFID;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.*;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+
+public class Main{
+	public static String RFID = null;
+	public static JSONArray array;
+	public static Panel form;
+	public static ReadRFID readRFID = null;
+		
+	public static void main(String[] args){
+		
+		form = new Panel();
+		readRFID = new ReadRFID();
+		
+	
+		Runnable task = new Runnable(){
+			public void run(){
+				readRFID.start();
+				while(true){
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					RFID = readRFID.getRFID();
+					//System.out.println(RFID);
+				}
+			}
+		};
+		
+		Thread check = new Thread(task);
+		check.start();
+		
+		
+	}
+	
+	public static void getData() {
+		try {
+			HttpClient client = HttpClientBuilder.create().build();
+			HttpGet request = new HttpGet("http://localhost:8080/api/employee");
+			HttpResponse response = client.execute(request);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					response.getEntity().getContent()));
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+
+			while ((line = reader.readLine()) != null) {
+				sb.append(line);
+			}
+			array = new JSONArray(sb.toString());
+
+		}catch (Exception e) {
+		}
+		System.out.println(array);
+
+	}
+
+	public static void CheckIn(){
+		try {
+			HttpClient client = HttpClientBuilder.create().build();
+			HttpPost requestpost = new HttpPost("http://localhost:8080/api/check-in");
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject person = array.getJSONObject(i);
+				if (person.getString("RFID").equals(RFID)) {
+					StringEntity params = new StringEntity(person.toString());
+					requestpost.setHeader("Content-type", "application/json");
+					requestpost.setEntity(params);
+					HttpResponse response = client.execute(requestpost);
+					BufferedReader reader = new BufferedReader(
+							new InputStreamReader(response.getEntity()
+									.getContent()));
+					StringBuilder sb = new StringBuilder();
+					String line = null;
+					while ((line = reader.readLine()) != null) {
+						sb.append(line);
+					}
+					JSONArray json = new JSONArray('[' + sb.toString() + ']');
+
+					form.setName(json.getJSONObject(0).getString("Name"));
+//					form.setDate(Integer.toString(json.getJSONObject(0).getInt("Hour"))
+//							+ ":" + Integer.toString(json.getJSONObject(0).getInt("Min"))
+//							+ ":" + Integer.toString(json.getJSONObject(0).getInt("Sec")));
+//					if(json.getJSONObject(0).getInt("Hour") > 8)
+//						person.put("late", person.getInt("late")+1);
+					//updateStat(person);
+						
+					// System.out.println(sb.toString());
+					System.out.println(person.getString("First_Name"));
+					break;
+				}
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+}
