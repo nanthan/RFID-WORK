@@ -8,6 +8,8 @@ var io = require('socket.io')(http);
 var db_emp = mongojs('employee', ['emp_list']);
 var db_admin = mongojs('employee', ['admin_list']);
 var db_log = mongojs('employee', ['emp_log']);
+var ins;
+var container = [];
 //var cal = require('app/cal');
 //console.log(cal.add(2,3));
 
@@ -38,12 +40,13 @@ app.post('/api/check-in',function(req,res){
 	now = new Date();
 	date = dateFormat(now, "dd-mm-yyyy");
 	time = now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
-	console.log(date);
+	//console.log(date);
 	ins = { 
 				card: req.body.card,
 				date: date,
 				time: time 
 				}
+	//tmp = req.body;
 	db_log.emp_log.insert((ins),function(err,data){
 		res.send(data);	
 		io.emit("check-in:refresh");
@@ -51,11 +54,25 @@ app.post('/api/check-in',function(req,res){
 	});
 });
 
-
 app.get('/api/check-in',function(req,res){
-	db_emp.emp_list.find({},function(err,logs){
+	//console.log(ins.card);
+	db_emp.emp_list.find(({card: ins.card}),function(err,data){
+	 	//console.log(data);
+	 	container = {ins:ins,
+	 				data:data[0]
+	 				}
+
+	 	res.send(container);
+	});
+})
+
+
+app.post('/api/show',function(req,res){
+	console.log(req.body.card);
+	db_person.person.find(({card:req.body.card}),function(err,logs){
 		res.send(logs);
 	});
+	io.emit("check-in:refresh");
 })
 
 io.on('connection', function(socket){

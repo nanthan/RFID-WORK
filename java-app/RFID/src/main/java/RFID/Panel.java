@@ -55,24 +55,29 @@ public class Panel extends JFrame {
 		fname.setFont(new Font("Serif", Font.BOLD, 20));
 		TextFname.setLocation(560, 50);
 		TextFname.setSize(220, 30);
+		TextFname.setFont(new Font("Serif", Font.BOLD, 20));
+		
 		
 		lname.setSize(300, 30);
 		lname.setLocation(450, 100);
 		lname.setFont(new Font("Serif", Font.BOLD, 20));
 		TextLname.setLocation(560, 100);
 		TextLname.setSize(220, 30);
+		TextLname.setFont(new Font("Serif", Font.BOLD, 20));
 		
 		position.setSize(300, 30);
 		position.setLocation(450, 150);
 		position.setFont(new Font("Serif", Font.BOLD, 20));
 		TextPosition.setLocation(560, 150);
 		TextPosition.setSize(220, 30);
+		TextPosition.setFont(new Font("Serif", Font.BOLD, 20));
 		
 		arrived.setSize(300, 30);
 		arrived.setLocation(450, 200);
 		arrived.setFont(new Font("Serif", Font.BOLD, 20));
 		TextArrived.setLocation(560, 200);
 		TextArrived.setSize(220, 30);
+		TextArrived.setFont(new Font("Serif", Font.BOLD, 20));
 		
 		date.setSize(800, 50);
 		date.setLocation(140, 400);
@@ -97,9 +102,11 @@ public class Panel extends JFrame {
 	
 	}
 	
-	public void setForm(String fname, String lname){
-		TextFname.setText(fname);
-		TextLname.setText(lname);
+	public void setForm(String fname, String lname, String position, String arrived){
+		TextFname.setText("  "+fname);
+		TextLname.setText("  "+lname);
+		TextPosition.setText("  "+position);
+		TextArrived.setText("  "+arrived);
 	}
 	
 }

@@ -1,9 +1,17 @@
 package RFID;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -20,11 +28,14 @@ public class Main{
 	public static JSONArray array;
 	public static Panel form;
 	public static ReadRFID readRFID = null;
-		
+	static Date now;
+
 	public static void main(String[] args){
 		
+			
 		form = new Panel();
 		readRFID = new ReadRFID();
+		
 		getData();
 	
 		Runnable task = new Runnable(){
@@ -85,17 +96,28 @@ public class Main{
 
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void CheckRFID() {
 		try {
 			HttpClient client = HttpClientBuilder.create().build();
 			HttpPost requestpost = new HttpPost("http://localhost:3000/api/check-in");
 			for (int i = 0; i < array.length(); i++) {
+				
 				JSONObject person = array.getJSONObject(i);
 				if (person.getString("card").equals(RFID)) {
+					// PLAY SOUND//
+					File fileIn = new File("lib/sound/bip.wav");
+					AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(fileIn);
+					Clip clip = AudioSystem.getClip();
+					clip.open(audioInputStream);
+					clip.start();
+					// END PLAY SOUND //
+					
 					StringEntity params = new StringEntity(person.toString());
 					requestpost.setHeader("Content-type", "application/json");
 					requestpost.setEntity(params);
 					HttpResponse response = client.execute(requestpost);
+					
 					BufferedReader reader = new BufferedReader(
 							new InputStreamReader(response.getEntity()
 									.getContent()));
@@ -104,12 +126,13 @@ public class Main{
 					while ((line = reader.readLine()) != null) {
 						sb.append(line);
 					}
-					System.out.println(sb);
-//					JSONArray json = new JSONArray('[' + sb.toString() + ']');
+					//System.out.println(sb);
 
+					now = new Date();
+					String time;
+					time = now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
 					
-					//System.out.println(person.getString("First_Name"));
-					form.setForm(person.getString("fname"),person.getString("lname"));
+					form.setForm(person.getString("fname"),person.getString("lname"),person.getString("position"), time);
 						
 					break;
 				}

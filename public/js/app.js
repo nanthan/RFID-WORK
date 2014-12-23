@@ -17,7 +17,7 @@ angular.module("myApp", ['btford.socket-io']) //load module
 	}
 
 	$scope.save = function(){
-		if($scope.employeeInstance.fname != null && $scope.employeeInstance.lname != null && $scope.employeeInstance.card != null){
+		if($scope.employeeInstance.fname != null && $scope.employeeInstance.lname != null && $scope.employeeInstance.card != null && $scope.employeeInstance.position != null){
 			$http.post('/api/employee', $scope.employeeInstance).success(function(data){
 			$scope.employees.push(data);
 			$scope.employeeInstance = {};
