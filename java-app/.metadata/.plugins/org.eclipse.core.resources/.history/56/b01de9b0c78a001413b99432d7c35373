@@ -106,7 +106,7 @@ public class Main{
 				JSONObject person = array.getJSONObject(i);
 				System.out.println(person);
 				
-				if (person.getString("card").equals(RFID)) {
+				if (person.getString("data.card").equals(RFID)) {
 					
 					// PLAY SOUND//
 					File fileIn = new File("lib/sound/bip.wav");

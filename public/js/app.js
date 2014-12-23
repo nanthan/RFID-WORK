@@ -12,7 +12,17 @@ angular.module("myApp", ['btford.socket-io']) //load module
 
 	function refreshEmployees(){
 		$http.get('/api/employee').success(function(data){
-			$scope.employees = data;
+			$scope.employees = [];
+			data.forEach(function(emp) {
+				$scope.employees.push({
+					_id: emp.data._id,
+					fname: emp.data.fname,
+					lname: emp.data.lname,
+					position: emp.data.position,
+			        card: emp.data.card,
+			        time: emp.log ? emp.log.time : null
+				});
+			});
 		});
 	}
 
@@ -23,13 +33,6 @@ angular.module("myApp", ['btford.socket-io']) //load module
 			$scope.employeeInstance = {};
 			});	
 		}
-	}
-
-	$scope.cal = function(){
-		var sum = 0;
-		angular.forEach(employees, function(index) {
-			sum += index;
-		});
 	}
 
 	socketIO.on('employee:refresh', function(){

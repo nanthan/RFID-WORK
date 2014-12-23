@@ -10,6 +10,7 @@ var db_admin = mongojs('employee', ['admin_list']);
 var db_log = mongojs('employee', ['emp_log']);
 var ins;
 var container = [];
+var pack = [];
 //var cal = require('app/cal');
 //console.log(cal.add(2,3));
 
@@ -17,8 +18,22 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
 app.get('/api/employee', function(req, res){
-	db_emp.emp_list.find({}, function(err, docs){
-		res.send(docs);	
+	db_emp.emp_list.count(function(err, empCount) {
+		pack = [];
+		db_emp.emp_list.find({}, function(err, docs){
+			
+		 	docs.forEach (function (e){
+		     	db_log.emp_log.find(({card: e.card})).sort({_id: -1 }).limit(1, function(err, data){
+		 			pack.push({data: e, log: (data != null ? data[0] : null)});
+		 			empCount--;
+		 			if (empCount == 0) {
+				 		res.send(pack);
+				 		return;
+				 	}
+				});
+		 	});
+				
+		});
 	});
 });
 
@@ -48,9 +63,10 @@ app.post('/api/check-in',function(req,res){
 				}
 	//tmp = req.body;
 	db_log.emp_log.insert((ins),function(err,data){
+		console.log(data);
 		res.send(data);	
 		io.emit("check-in:refresh");
-		//io.emit("employee:refresh");
+		
 	});
 });
 
@@ -66,14 +82,6 @@ app.get('/api/check-in',function(req,res){
 	});
 })
 
-
-app.post('/api/show',function(req,res){
-	console.log(req.body.card);
-	db_person.person.find(({card:req.body.card}),function(err,logs){
-		res.send(logs);
-	});
-	io.emit("check-in:refresh");
-})
 
 io.on('connection', function(socket){
 	console.log("a user connected");
