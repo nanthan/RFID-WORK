@@ -15,10 +15,10 @@ angular.module("myIns", ['btford.socket-io']) //load module
 		$http.get('/api/check-in').success(function(data){
 			//$scope.logs = data;
 			//console.log(data);
-			$scope.fname = data.data[0].fname;
-			$scope.lname = data.data[0].lname;
-			$scope.position = data.data[0].position;
-			$scope.arrived = data.ins[0].time +" | "+ data.ins.date;
+			$scope.fname = data.data.fname;
+			$scope.lname = data.data.lname;
+			$scope.position = data.data.position;
+			$scope.arrived = data.ins.time +" | "+ data.ins.date;
 		})
 	}
 
