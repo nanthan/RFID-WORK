@@ -88,7 +88,7 @@ public class Main{
 	public static void CheckRFID() {
 		try {
 			HttpClient client = HttpClientBuilder.create().build();
-			HttpPost requestpost = new HttpPost("http://localhost:3000/api/check-in");
+			HttpPost requestpost = new HttpPost("http://localhost:3000/api/employee");
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject person = array.getJSONObject(i);
 				if (person.getString("card").equals(RFID)) {
@@ -100,17 +100,17 @@ public class Main{
 							new InputStreamReader(response.getEntity()
 									.getContent()));
 					StringBuilder sb = new StringBuilder();
-					String line = null;
-					while ((line = reader.readLine()) != null) {
-						sb.append(line);
-					}
-					System.out.println(sb);
+//					String line = null;
+//					while ((line = reader.readLine()) != null) {
+//						sb.append(line);
+//					}
 //					JSONArray json = new JSONArray('[' + sb.toString() + ']');
 
-					
-					//System.out.println(person.getString("First_Name"));
+					//System.out.println(person.getString("fname"));
 					form.setForm(person.getString("fname"),person.getString("lname"));
 						
+					// System.out.println(sb.toString());
+					//System.out.println(person.getString("fname"));
 					break;
 				}
 			}

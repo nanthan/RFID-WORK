@@ -7,6 +7,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var db_emp = mongojs('employee', ['emp_list']);
 var db_admin = mongojs('employee', ['admin_list']);
+var db_log = mongojs('employee', ['emp_log']);
 //var cal = require('app/cal');
 //console.log(cal.add(2,3));
 
@@ -35,22 +36,18 @@ app.get('/api/admin', function(req, res){
 
 app.post('/api/check-in',function(req,res){
 	now = new Date();
-	date = dateFormat(now, "dddd, mmmm dS, yyyy, h:MM:ss TT");
-	hours = now.getHours()+"";
-	min  = now.getMinutes()+"";
-	sec  = now.getSeconds()+"";
+	date = dateFormat(now, "dd-mm-yyyy");
+	time = now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
 	console.log(date);
 	ins = { 
-				RFID: req.body.RFID,
-				Name: req.body.First_Name,
-				Date: date,
-				Hour: hours,
-				Min : min,
-				Sec : sec
+				card: req.body.card,
+				date: date,
+				time: time 
 				}
-	db_emp.emp_list.insert((ins),function(err,data){
+	db_log.emp_log.insert((ins),function(err,data){
 		res.send(data);	
 		io.emit("check-in:refresh");
+		//io.emit("employee:refresh");
 	});
 });
 

@@ -108,7 +108,7 @@ public class Main{
 //					JSONArray json = new JSONArray('[' + sb.toString() + ']');
 
 					
-					//System.out.println(person.getString("First_Name"));
+					System.out.println(person.getString("First_Name"));
 					form.setForm(person.getString("fname"),person.getString("lname"));
 						
 					break;
