@@ -17,6 +17,7 @@ var pack = [];
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
+//for employee_list page
 app.get('/api/employee', function(req, res){
 	db_emp.emp_list.count(function(err, empCount) {
 		pack = [];
@@ -37,6 +38,7 @@ app.get('/api/employee', function(req, res){
 	});
 });
 
+//for admin page
 app.post('/api/employee', function(req, res){
 	//insert new employee
 	db_emp.emp_list.insert(req.body, function(err, docs){
@@ -45,11 +47,13 @@ app.post('/api/employee', function(req, res){
 	});
 });
 
+//for login page
 app.get('/api/admin', function(req, res){
 	db_admin.admin_list.find({}, function(err, docs){
 		res.send(docs);
 	});
 });
+
 
 app.post('/api/check-in',function(req,res){
 	now = new Date();
@@ -66,7 +70,7 @@ app.post('/api/check-in',function(req,res){
 		console.log(data);
 		res.send(data);	
 		io.emit("check-in:refresh");
-		
+		io.emit("employee:refresh");
 	});
 });
 

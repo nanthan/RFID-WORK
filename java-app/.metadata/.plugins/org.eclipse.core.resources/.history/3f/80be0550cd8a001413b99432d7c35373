@@ -1,0 +1,112 @@
+package RFID;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.util.Date;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class Panel extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	String sfname = null;
+	String slname = null;
+	String sposition = null;
+
+	
+	JTextField TextFname = new JTextField();
+	JTextField TextLname = new JTextField();
+	JTextField TextPosition = new JTextField();
+	JTextField TextArrived = new JTextField();
+	
+	public Panel() {
+
+		JFrame frame = new JFrame("ANA Company");
+		frame.setLayout(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frame.setResizable(false);
+		
+		JPanel contentPane = new JPanel();
+		contentPane.setOpaque(true);
+        contentPane.setBackground(Color.WHITE);
+        contentPane.setLayout(null);
+        
+		JLabel fname = new JLabel("First Name : ");
+		JLabel lname = new JLabel("Last Name : ");
+		JLabel position = new JLabel("Position : ");
+		JLabel arrived = new JLabel("Arrived : ");
+		JLabel date = new JLabel();
+		
+		
+		TextFname.setEnabled(false);
+		TextLname.setEnabled(false);
+		TextPosition.setEnabled(false);
+		TextArrived.setEnabled(false);
+		
+		fname.setSize(300, 30);
+		fname.setLocation(450, 50);
+		fname.setFont(new Font("Serif", Font.BOLD, 20));
+		TextFname.setLocation(560, 50);
+		TextFname.setSize(220, 30);
+		TextFname.setFont(new Font("Serif", Font.BOLD, 20));
+		
+		
+		lname.setSize(300, 30);
+		lname.setLocation(450, 100);
+		lname.setFont(new Font("Serif", Font.BOLD, 20));
+		TextLname.setLocation(560, 100);
+		TextLname.setSize(220, 30);
+		TextLname.setFont(new Font("Serif", Font.BOLD, 20));
+		
+		position.setSize(300, 30);
+		position.setLocation(450, 150);
+		position.setFont(new Font("Serif", Font.BOLD, 20));
+		TextPosition.setLocation(560, 150);
+		TextPosition.setSize(220, 30);
+		TextPosition.setFont(new Font("Serif", Font.BOLD, 20));
+		
+		arrived.setSize(300, 30);
+		arrived.setLocation(450, 200);
+		arrived.setFont(new Font("Serif", Font.BOLD, 20));
+		TextArrived.setLocation(560, 200);
+		TextArrived.setSize(220, 30);
+		TextArrived.setFont(new Font("Serif", Font.BOLD, 20));
+		
+		date.setSize(800, 50);
+		date.setLocation(140, 400);
+		date.setFont(new Font("Serif", Font.BOLD, 40));
+		date.setText(new Date().toString());
+		
+		contentPane.add(fname);
+		contentPane.add(lname);
+		contentPane.add(position);
+		contentPane.add(arrived);
+		contentPane.add(date);
+		contentPane.add(TextFname, BorderLayout.SOUTH);
+		contentPane.add(TextLname, BorderLayout.SOUTH);
+		contentPane.add(TextPosition, BorderLayout.SOUTH);
+		contentPane.add(TextArrived, BorderLayout.SOUTH);
+		
+		
+		frame.setContentPane(contentPane);
+		frame.setLocationByPlatform(true);
+		frame.setSize(800, 600);
+		frame.setVisible(true);	
+	
+	}
+	
+	public void setForm(String fname, String lname, String position, String arrived){
+		TextFname.setText("  "+fname);
+		TextLname.setText("  "+lname);
+		TextPosition.setText("  "+position);
+		TextArrived.setText("  "+arrived);
+	}
+	
+}

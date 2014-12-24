@@ -1,0 +1,140 @@
+package RFID;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.Timer;
+
+public class Panel extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	String sfname = null;
+	String slname = null;
+	String sposition = null;
+	private String curTime = null;
+	private Date date;
+	
+	JTextField TextFname = new JTextField();
+	JTextField TextLname = new JTextField();
+	JTextField TextPosition = new JTextField();
+	JTextField TextArrived = new JTextField();
+	
+	public Panel() {
+		JFrame frame = new JFrame("ANA Company");
+		Icon myLogo = new ImageIcon("lib/img/bg.jpg");
+		final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		frame.setLayout(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frame.setResizable(false);
+		
+		JPanel contentPane = new JPanel();
+		contentPane.setOpaque(true);
+        contentPane.setBackground(Color.WHITE);
+        contentPane.setLayout(null);
+        
+        JLabel myLabel = new JLabel(myLogo);
+		JLabel fname = new JLabel("First Name : ");
+		JLabel lname = new JLabel("Last Name : ");
+		JLabel position = new JLabel("Position : ");
+		JLabel arrived = new JLabel("Arrived : ");
+		final JLabel dateLabel = new JLabel();
+		
+		new Timer(1000, new ActionListener() {
+
+	        public void actionPerformed(ActionEvent e) {
+	                date = new Date();
+	                //System.out.println(date);
+	                curTime = sdf.format(date);
+	                dateLabel.setText(curTime);
+	        }
+		}).start();
+		
+		TextFname.setEnabled(false);
+		TextLname.setEnabled(false);
+		TextPosition.setEnabled(false);
+		TextArrived.setEnabled(false);
+		
+		myLabel.setSize(800,600);
+		
+		fname.setSize(300, 30);
+		fname.setLocation(450, 50);
+		fname.setFont(new Font("Serif", Font.BOLD, 20));
+		TextFname.setLocation(560, 50);
+		TextFname.setSize(220, 30);
+		
+		lname.setSize(300, 30);
+		lname.setLocation(450, 100);
+		lname.setFont(new Font("Serif", Font.BOLD, 20));
+		TextLname.setLocation(560, 100);
+		TextLname.setSize(220, 30);
+		
+		position.setSize(300, 30);
+		position.setLocation(450, 150);
+		position.setFont(new Font("Serif", Font.BOLD, 20));
+		TextPosition.setLocation(560, 150);
+		TextPosition.setSize(220, 30);
+		
+		arrived.setSize(300, 30);
+		arrived.setLocation(450, 200);
+		arrived.setFont(new Font("Serif", Font.BOLD, 20));
+		TextArrived.setLocation(560, 200);
+		TextArrived.setSize(220, 30);
+		
+		dateLabel.setSize(800, 50);
+		dateLabel.setLocation(340, 400);
+		dateLabel.setFont(new Font("Serif", Font.BOLD, 40));
+		
+		
+		contentPane.add(fname);
+		contentPane.add(lname);
+		contentPane.add(position);
+		contentPane.add(arrived);
+		contentPane.add(dateLabel);
+		contentPane.add(TextFname, BorderLayout.SOUTH);
+		contentPane.add(TextLname, BorderLayout.SOUTH);
+		contentPane.add(TextPosition, BorderLayout.SOUTH);
+		contentPane.add(TextArrived, BorderLayout.SOUTH);
+		contentPane.add(myLabel);
+		
+		frame.setContentPane(contentPane);
+		frame.setLocationByPlatform(true);
+		frame.setSize(800, 600);
+		frame.setVisible(true);	
+	
+	}
+	
+	public void setForm(String fname, String lname, String position, String arrived){
+		TextFname.setText("  "+fname);
+		TextLname.setText("  "+lname);
+		TextPosition.setText("  "+position);
+		TextArrived.setText("  "+arrived);
+	}
+	
+	public boolean checkLate(){
+		String time = null;
+		int itime = 0;
+		time = curTime;
+		time = time.replaceAll(":","");
+		itime = Integer.parseInt(time);
+		System.out.println(itime);
+		if(itime >= 90000)
+			return true;
+		else
+			return false;
+	}
+	
+}

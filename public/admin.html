@@ -1,21 +1,20 @@
-<html>
+<!DOCTYPE html>
+<html ng-app="myApp">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to ANA Company</title>
+	<title>Admin</title>
 	<script src="lib/jquery/dist/jquery.min.js"></script>
 	<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="js/date_time.js"></script>
 	<script type="text/javascript" src="lib/angular/angular.min.js"></script>
 	<script type="text/javascript" src="lib/socket.io-client/socket.io.js"></script>
 	<script type="text/javascript" src="lib/angular-socket-io/socket.js"></script>
 	<script type="text/javascript" src="js/admin.js"></script>
-
+		
 	<link rel="stylesheet" type="text/css" href="css/signin.css">
 	<link rel="stylesheet" type="text/css" href="css/sticky-footer-navbar.css">
-	<link rel="stylesheet" type="text/css" href="css/myCSS.css">
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.css">
 </head>
-<body>
+<body ng-controller="mainCtrl">
 	<!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
@@ -32,14 +31,92 @@
           <ul class="nav navbar-nav">
             <li><a href="login.html"><span class="
 glyphicon glyphicon-sort"></span>Login</a></li>
-            <li><a href="employee_list.html"><span class="glyphicon glyphicon-globe"></span>Employee list</a></li>
+            <li class="active"><a href="employee_list.html"><span class="glyphicon glyphicon-globe"></span>Employee list</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
-
+    
+	<div class="container">
+      <div class="page-header">
+        <h1 align="center">Employee List</h1>
+      </div>
+    </div>
+    <div align="right"><a href="javascript:window.print()"><img src="img/print.jpg" width="150"></img></a></div>
+	<table class="table table-hover">
+		<thead>
+			<th>
+        <a href="javascript:void(0)" ng-click="orderByField='_id'; reverseSort = !reverseSort">
+        ID<span ng-show="orderByField == '_id'"><span ng-show="!reverseSort"></span><span ng-show="reverseSort"></span></span>
+        </a>
+      </th>
+			<th>
+        <a href="javascript:void(0)" ng-click="orderByField='fname'; reverseSort = !reverseSort">
+        First Name<span ng-show="orderByField == 'fname'"><span ng-show="!reverseSort"></span><span ng-show="reverseSort"></span></span>
+        </a>
+      </th>
+			<th>
+        <a href="javascript:void(0)" ng-click="orderByField='lname'; reverseSort = !reverseSort">
+        Last Name<span ng-show="orderByField == 'lname'"><span ng-show="!reverseSort"></span><span ng-show="reverseSort"></span></span>
+        </a>
+      </th>
+      <th>
+        <a href="javascript:void(0)" ng-click="orderByField='position'; reverseSort = !reverseSort">
+        Position<span ng-show="orderByField == 'position'"><span ng-show="!reverseSort"></span><span ng-show="reverseSort"></span></span>
+        </a>
+      </th>
+      <th>
+        <a href="javascript:void(0)" ng-click="orderByField='card'; reverseSort = !reverseSort">
+        RFID Card<span ng-show="orderByField == 'card'"><span ng-show="!reverseSort"></span><span ng-show="reverseSort"></span></span>
+        </a>
+        </th>
+      <th>
+        <a href="javascript:void(0)" ng-click="orderByField='time'; reverseSort = !reverseSort">
+        Time-In<span ng-show="orderByField == 'time'"><span ng-show="!reverseSort"></span><span ng-show="reverseSort"></span></span>
+        </a>
+        </th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="employee in employees|orderBy:orderByField:reverseSort">
+				<td>{{employee._id}}</td>
+				<td>{{employee.fname}}</td>
+				<td>{{employee.lname}}</td>
+				<td>{{employee.position}}</td>
+        <td>{{employee.card}}</td>
+        <td>{{employee.time}}</td>
+			</tr>
+		</tbody>
+	</table>
 	<hr>
-    <div id="footer">
+	<form class="form-inline" role="form">
+  		<div class="form-group">
+    		<div class="input-group">
+		      <div class="input-group-addon">First Name</div>
+		      <input type="text" class="form-control" id="fname" placeholder="First Name" ng-model="employeeInstance.fname" required>
+    		</div>
+  		</div>
+  		<div class="form-group">
+    		<div class="input-group">
+		      <div class="input-group-addon">Last Name</div>
+		      <input type="text" class="form-control" id="lname" placeholder="Last Name" ng-model="employeeInstance.lname" required>
+    		</div>
+  		</div>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon">Position</div>
+          <input type="text" class="form-control" id="card" placeholder="Position" ng-model="employeeInstance.position" required>
+        </div>
+      </div>
+  		<div class="form-group">
+    		<div class="input-group">
+		      <div class="input-group-addon">RFID Card</div>
+		      <input type="text" class="form-control" id="card" placeholder="RFID Card" ng-model="employeeInstance.card" required>
+    		</div>
+  		</div>
+  		<button class="btn btn-default" ng-click="save()">Add Employee</button>
+	</form>
+	<hr>
+	<div id="footer">
       <div class="container">
         <p class="text-muted" align="center">© ANA Company 2013-2014</p>
       </div>

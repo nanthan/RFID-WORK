@@ -12,6 +12,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JOptionPane;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -113,8 +114,20 @@ public class Main{
 					AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(fileIn);
 					Clip clip = AudioSystem.getClip();
 					clip.open(audioInputStream);
-					clip.start();
+					if(!form.checkLate())
+						clip.start();
 					// END PLAY SOUND //
+					
+					else{
+						// PLAY SOUND//
+						File fileIn2 = new File("lib/sound/late.wav");
+						AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(fileIn2);
+						Clip clip2 = AudioSystem.getClip();
+						clip2.open(audioInputStream2);
+						clip2.start();
+						// END PLAY SOUND //
+						JOptionPane.showMessageDialog(null,"You late !!", "Warning", JOptionPane.WARNING_MESSAGE);
+					}
 					
 					StringEntity params = new StringEntity(person.toString());
 					requestpost.setHeader("Content-type", "application/json");
